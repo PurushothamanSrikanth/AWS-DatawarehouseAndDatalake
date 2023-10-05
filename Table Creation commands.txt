@@ -1,0 +1,27 @@
+#for Data Warehouse
+
+CREATE TABLE test.users (
+id STRING,
+Name STRING,
+Address STRING,
+PAN STRING,
+Phone_Number STRING,
+isStudent STRING,
+Salary STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+
+
+#for Data Lake
+
+CREATE EXTERNAL TABLE test.users (
+id STRING,
+Name STRING,
+Address STRING,
+PAN STRING,
+Phone_Number INT(10),
+isStudent BOOLEAN,
+Salary INT)
+STORED AS PARQUET
+LOCATION 's3://your-bucket-name/path-to-table/';
