@@ -3,7 +3,7 @@
 import pandas, numpy, os, sys, pyspark
 import time, random
 
-pathforDL = 
+pathforDL = '/data/test'
 
 
 # Creating a Spark Session

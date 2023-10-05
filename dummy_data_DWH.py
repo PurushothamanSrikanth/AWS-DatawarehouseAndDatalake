@@ -3,7 +3,7 @@
 import pandas, numpy, os, sys, pyspark
 import time, random
 
-pathforDWH = 
+pathforDWH = '/users/hive/warehouse/test/user'
 
 # Creating a Spark Session
 spark = SparkSession\
