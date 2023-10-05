@@ -7,7 +7,8 @@ Address STRING,
 PAN STRING,
 Phone_Number STRING,
 isStudent STRING,
-Salary STRING)
+Salary STRING,
+Month STRING)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ',';
 
@@ -22,6 +23,7 @@ Address STRING,
 PAN STRING,
 Phone_Number INT(10),
 isStudent BOOLEAN,
-Salary INT)
+Salary INT,
+Month STRING)
 STORED AS PARQUET
 LOCATION 's3://your-bucket-name/path-to-table/';
