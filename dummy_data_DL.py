@@ -44,7 +44,7 @@ while True:
         df = spark.createDataFrame(data, schema = schema_for_DL)
 
         # Writing data into the Hive DataWarehouse table
-        df.write.mode("append").format("parquet").path(pathforDL)
+        df.repartition("Month").write.mode("append").format("parquet").path(pathforDL)
 
         time.sleep(1)
     except KeyboardInterrupt:

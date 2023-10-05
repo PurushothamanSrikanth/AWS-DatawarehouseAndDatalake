@@ -44,7 +44,7 @@ while True:
         df = spark.createDataFrame(data, schema = schema_for_DWH)
 
         # Writing data into the Hive DataWarehouse table
-        df.write.mode("append").format("parquet").path(pathforDWH)
+        df.repartition("Month").write.mode("overwrite").format("parquet").path(pathforDWH)
         spark.sql('MSCK REPAIR TABLE test.users')
 
         time.sleep(1)
