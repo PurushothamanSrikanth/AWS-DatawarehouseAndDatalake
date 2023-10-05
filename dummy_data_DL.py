@@ -22,7 +22,7 @@ schema_for_DL = StructType(
     StructField("Phone_Number", StringType(), False),
     StructField("isStudent", StringType(), False),
     StructField("Salary", StringType(), False)
-    StructField("Month", StringType(), False),
+    StructField("Month", StringType(), False)
 )
 while True:
     try:
@@ -36,6 +36,7 @@ while True:
                 str(random.randint(1000000000, 9999999999)),
                 random.choice(["TRUE", "FALSE"]),
                 str(random.randint(0, 99999)),
+                random.choice(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"])
             )
         ]
 
