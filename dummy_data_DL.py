@@ -3,6 +3,8 @@
 import pandas, numpy, os, sys, pyspark
 import time, random
 from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField
+from pyspark.sql.types import BooleanType, IntegerType, StringType, DecimalType, LongType
 import findspark
 findspark.init()
 
@@ -34,14 +36,14 @@ while True:
         data = [
             (
                 str(random.randint(1, 100)),
-                "Name_" + str(random.randint(1, 10)),
-                "Address_" + str(random.randint(1, 10)),
-                "PAN_" + str(random.randint(1, 10)),
+                str("Name_" + str(random.randint(1, 10))),
+                str("Address_" + str(random.randint(1, 10))),
+                str("PAN_" + str(random.randint(1, 10))),
                 str(random.randint(1000000000, 9999999999)),
-                random.choice(["TRUE", "FALSE"]),
+                str(random.choice([True, False])),
                 str(random.randint(0, 99999)),
-                random.choice(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"])
-            )
+                str(random.choice(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"])
+            ))
         ]
 
         # Creating a DataFrame from the data and schema
