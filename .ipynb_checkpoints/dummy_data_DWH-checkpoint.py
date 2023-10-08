@@ -2,6 +2,9 @@
 
 import pandas, numpy, os, sys, pyspark
 import time, random
+from pyspark.sql import SparkSession
+import findspark
+findspark.init()
 
 pathforDWH = '/user/hive/warehouse/test'
 
@@ -13,7 +16,7 @@ spark = SparkSession\
     .getOrCreate()
 
 # Schema for DWH
-schema_for_DWH = StructType(
+schema_for_DWH = StructType([
     StructField("id", StringType(), False),
     StructField("Name", StringType(), False),
     StructField("Address", StringType(), False),
@@ -22,7 +25,7 @@ schema_for_DWH = StructType(
     StructField("isStudent", BooleanType(), False),
     StructField("Salary", IntergerType(), False),
     StructField("Month", StringType(), False)
-)
+])
 
 while True:
     try:
