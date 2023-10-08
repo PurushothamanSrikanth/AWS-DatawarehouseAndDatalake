@@ -1,30 +1,32 @@
 #for Data Warehouse
 
 CREATE TABLE test.users (
-id STRING,
-Name STRING,
-Address STRING,
-PAN STRING,
-Phone_Number STRING,
-isStudent STRING,
-Salary STRING)
+    id STRING,
+    Name STRING,
+    Address STRING,
+    PAN STRING,
+    Phone_Number STRING,
+    isStudent STRING,
+    Salary STRING
+)
 PARTITIONED BY (Month STRING)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
-LOCATION '';
+LOCATION '/user/hive/warehouse/test';
 
 
 
 #for Data Lake
 
-CREATE EXTERNAL TABLE test.users (
-id STRING,
-Name STRING,
-Address STRING,
-PAN STRING,
-Phone_Number INT(10),
-isStudent BOOLEAN,
-Salary INT)
+CREATE EXTERNAL TABLE test.`user` (
+  id STRING,
+  Name STRING,
+  Address STRING,
+  PAN STRING,
+  Phone_Number DECIMAL(10, 0),
+  isStudent BOOLEAN,
+  Salary INT
+)
 PARTITIONED BY (Month STRING)
 STORED AS PARQUET
-LOCATION '';
+LOCATION 's3n://dwanddl/user/';
