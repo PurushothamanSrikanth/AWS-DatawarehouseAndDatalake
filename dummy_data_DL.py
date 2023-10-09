@@ -5,16 +5,22 @@ import time, random
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField
 from pyspark.sql.types import BooleanType, IntegerType, StringType, DecimalType, LongType
+from pyspark import SparkConf
 import findspark
 findspark.init()
 
-pathforDL = 's3n://dwanddl/user/'
+pathforDL = 's3://dwanddl/user/'
 
+conf = SparkConf()
+conf.set('spark.jars.packages', 'org.apache.hadoop:hadoop-aws:3.3.3')
+conf.set('spark.jars.packages', 'com.amazonaws:aws-java-sdk-bundle:1.11.901')
+conf.set('spark.jars.packages', 'org.apache.hadoop:hadoop-common:3.3.3')
 
 # Creating a Spark Session
 spark = SparkSession\
     .builder\
     .appName("Dummy Data Generation Code")\
+    .config('spark.hadoop.fs.s3a.aws.credentials.provider', 'org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider')\
     .enableHiveSupport()\
     .getOrCreate()
 
@@ -30,7 +36,7 @@ schema_for_DL = StructType([
     StructField("Month", StringType(), False)
 ])
 
-while True:
+for i in range(20):
     try:
         # Generate random data for DL
         data = [
@@ -50,7 +56,7 @@ while True:
         df = spark.createDataFrame(data, schema=schema_for_DL)
 
         # Writing data into the Hive DataWarehouse table
-        df.repartition("Month").write.mode("append").parquet(pathforDL)
+        df.repartition("Month").write.mode("overwrite").parquet(pathforDL)
 
         time.sleep(1)
     except KeyboardInterrupt:
