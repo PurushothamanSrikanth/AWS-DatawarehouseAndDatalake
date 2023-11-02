@@ -1,4 +1,4 @@
-# DWandDL_AWS
+# AWS-DatawarehouseAndDatalake
 
 
 ## _Steps to run the program_ 
